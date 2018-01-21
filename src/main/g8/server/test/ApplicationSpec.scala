@@ -11,10 +11,10 @@ import Matchers._
 class ApplicationSpec extends PlaySpec with GuiceOneServerPerSuite {
   "Application" should {
     val wsClient = app.injector.instanceOf[WSClient]
-    val myPublicAddress = s"localhost:$port"
+    val myPublicAddress = s"localhost:$$port"
 
     "send 404 on a bad request" in {
-      val testURL = s"http://$myPublicAddress/boom"
+      val testURL = s"http://$$myPublicAddress/boom"
 
       val response = Await.result(wsClient.url(testURL).get(), 1 seconds)
       response.status mustBe NOT_FOUND
