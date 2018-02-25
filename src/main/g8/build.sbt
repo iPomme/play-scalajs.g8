@@ -9,12 +9,14 @@ lazy val server = (project in file("server")).settings(commonSettings).settings(
     "com.typesafe.play" %% "play-slick" % "3.0.0",
     "com.typesafe.play" %% "play-slick-evolutions" % "3.0.0",
     "com.h2database" % "h2" % "1.4.196",
+    "com.dripower" %% "play-circe" % "2609.0",
     guice,
     "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % "test"
   ),
+  swaggerDomainNameSpaces := Seq("models"),
   // Compile the project before generating Eclipse files, so that generated .scala or .class files for views and routes are present
   EclipseKeys.preTasks := Seq(compile in Compile)
-).enablePlugins(PlayScala).
+).enablePlugins(PlayScala, SwaggerPlugin).
   dependsOn(sharedJvm)
 
 lazy val client = (project in file("client")).settings(commonSettings).settings(
